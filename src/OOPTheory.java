@@ -3,19 +3,18 @@ import java.util.Scanner;
 public class OOPTheory 
 {	public static void main(String[] args)
 	{
+		//Variables
 		Scanner scan = new Scanner(System.in);
 		int choice;
+		boolean quiz = true;
+		//Call functions
 		QuestionPrinter.printHeader();
-		System.out.println("Enter name of file containing questions:");
 		String fname = scan.nextLine();
 	
-		choice = QuestionPrinter.showMenuAndGetChoice(scan);
+		while(quiz)
 		{
-			/* 
-		 	* this will present a menu of options to the user.
-		 	* the user will be able to create Questions, print them,
-		 	* delete them, and save to a json file.
-		 	*/
+			//Assignment of choice
+			choice = QuestionPrinter.showMenuAndGetChoice(scan);
 			if (choice == 1) 
 			{ 
 				System.out.println("How many questions would you like?");
@@ -26,17 +25,17 @@ public class OOPTheory
 			else if (choice == 2) 
 			{
 				ArrayList<Question>Questions = QuestionReader.readFromJSON(fname);
+				System.out.println("Here are the answers:");
 				QuestionPrinter.printQuestions(Questions);
 			}	 
 			else if (choice == 3) 
 			{
-				System.out.println("*********************************************************************");
-				System.out.println("*		" + "Thank you for taking CPSC 24500+ "	+ "		    *");
-				System.out.println("*********************************************************************");
+				QuestionPrinter.allDone();
+				quiz = false;
 			}
-			else
+			else if(choice != 1 || choice != 2 || choice != 3)
 			{
-				System.out.println("Invald input.");
+				System.out.println("Invald input. Please input a number, 1,2, or 3.");
 			}
 		}
 	}
